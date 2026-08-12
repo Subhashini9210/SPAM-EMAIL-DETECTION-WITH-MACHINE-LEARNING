@@ -1,0 +1,31 @@
+import importlib
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sb
+
+try:
+    train_test_split = importlib.import_module('sklearn.model_selection').train_test_split
+except ImportError:
+    try:
+        train_test_split = importlib.import_module('sklearn.cross_validation').train_test_split
+    except ImportError:
+        raise ImportError("scikit-learn is required. Install it with: pip install scikit-learn")
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+try:
+    from xgboost import XGBClassifier
+except Exception:
+    XGBClassifier = None
+from sklearn import metrics
+
+import warnings
+warnings.filterwarnings('ignore')
+df = pd.read_csv('/content/Tesla.csv')
+df.head()
+df.shape
+df.describe()
+df.info()
+df.isnull().sum()
