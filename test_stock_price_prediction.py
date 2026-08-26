@@ -16,7 +16,7 @@ from sklearn import metrics
 
 import warnings
 warnings.filterwarnings('ignore')
-
+print("program is running")
 
 # Test cases for the stock price prediction model
 
@@ -203,3 +203,4 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("✓ All tests passed!")
     print("=" * 60)
+    
