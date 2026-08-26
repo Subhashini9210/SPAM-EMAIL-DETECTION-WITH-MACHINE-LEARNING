@@ -7,103 +7,198 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
-from xgboost import XGBClassifier
+try:
+    from xgboost import XGBClassifier
+    XGBOOST_AVAILABLE = True
+except ImportError:
+    XGBOOST_AVAILABLE = False
 from sklearn import metrics
+from sklearn.metrics import ConfusionMatrixDisplay
 
 import warnings
 warnings.filterwarnings('ignore')
-df = pd.read_csv('/content/Tesla.csv')
-df.head()
-df.shape
-df.describe()
-df.info()
 
-plt.figure(figsize=(15,5))
-plt.plot(df['close'])
-plt.title('Tesla Close Price.',fontsize=15)
-plt.ylabel('price in dollars.')
+# Load data
+df = pd.read_csv('Tesla.csv')
+
+print("=" * 60)
+print("TESLA STOCK PRICE PREDICTION MODEL")
+print("=" * 60)
+
+print("\n--- Dataset Overview ---")
+print(df.head())
+print(f"\nDataset Shape: {df.shape}")
+print(f"\nDataset Info:")
+print(df.info())
+print(f"\nMissing Values:\n{df.isnull().sum()}")
+
+# Visualize closing price
+print("\n--- Visualizing Close Price ---")
+plt.figure(figsize=(15, 5))
+plt.plot(df['Close'])
+plt.title('Tesla Close Price', fontsize=15)
+plt.ylabel('Price in Dollars')
+plt.xlabel('Date')
 plt.show()
 
-df.head()
+print(df.head())
 
-df[df['close'] == df['Adj close']].shape
-df = df.drop(['Adj close'],axis=1)
-df.isnull().sum()
+# Data preprocessing
+print("\n--- Data Preprocessing ---")
 
+# Check and handle 'Adj Close' column (case-insensitive)
+adj_close_col = None
+for col in df.columns:
+    if col.lower() == 'adj close':
+        adj_close_col = col
+        break
+
+if adj_close_col:
+    print(f"Checking relationship between Close and {adj_close_col}...")
+    print(f"Equal values count: {(df['Close'] == df[adj_close_col]).sum()}")
+    df = df.drop([adj_close_col], axis=1)
+
+# Display features
 features = ['Open', 'High', 'Low', 'Close', 'Volume']
+print(f"Features for analysis: {features}")
 
-plt.subplots(figsize=(20,10))
+# Visualize feature distributions
+plt.figure(figsize=(20, 10))
 for i, col in enumerate(features):
-  plt.subplot(2,3,i+1)
-  sb.boxplot(df[col])
+    plt.subplot(2, 3, i+1)
+    sb.boxplot(df[col])
 plt.show()
 
-splitted = df['Date'].str.split('/', expand=True)
+# Feature engineering
+print("\n--- Feature Engineering ---")
 
-df['day'] = splitted[1].astype('int')
-df['month'] = splitted[0].astype('int')
-df['year'] = splitted[2].astype('int')
+# Extract date components
+if 'Date' in df.columns:
+    splitted = df['Date'].str.split('/', expand=True)
+    df['day'] = splitted[1].astype('int')
+    df['month'] = splitted[0].astype('int')
+    df['year'] = splitted[2].astype('int')
+    print("Date components extracted (day, month, year)")
 
-df.head()
-df['is_quarter_end'] = np.where(df['month']%3==0,1,0)
-df.head()
+print(df.head())
 
-data_grouped = df.drop('Date', axis=1).groupby('year').mean()
-plt.subplots(figsize=(20,10))
+# Quarter end indicator
+df['is_quarter_end'] = np.where(df['month'] % 3 == 0, 1, 0)
+print("Quarter end indicator created")
+print(df.head())
 
+# Group by year analysis
+print("\n--- Yearly Analysis ---")
+if 'Date' in df.columns:
+    data_grouped = df.drop('Date', axis=1).groupby('year').mean()
+else:
+    data_grouped = df.groupby('year').mean()
+
+plt.figure(figsize=(20, 10))
 for i, col in enumerate(['Open', 'High', 'Low', 'Close']):
-  plt.subplot(2,2,i+1)
-  data_grouped[col].plot.bar()
+    plt.subplot(2, 2, i+1)
+    data_grouped[col].plot.bar()
+    plt.title(f'{col} by Year')
 plt.show()
 
-# This code is modified by Susobhan Akhuli
+# Quarter end analysis
+print("\n--- Quarter End Analysis ---")
+if 'Date' in df.columns:
+    quarter_analysis = df.drop('Date', axis=1).groupby('is_quarter_end').mean()
+else:
+    quarter_analysis = df.groupby('is_quarter_end').mean()
+print(quarter_analysis)
 
-df.drop('Date', axis=1).groupby('is_quarter_end').mean()
+# Create derived features
+df['open-close'] = df['Open'] - df['Close']
+df['low-high'] = df['Low'] - df['High']
 
-df['open-close']  = df['Open'] - df['Close']
-df['low-high']  = df['Low'] - df['High']
+# Target variable: 1 if next day's price is higher, 0 otherwise
 df['target'] = np.where(df['Close'].shift(-1) > df['Close'], 1, 0)
 
-plt.pie(df['target'].value_counts().values, 
-        labels=[0, 1], autopct='%1.1f%%')
+print("\n--- Target Variable Distribution ---")
+plt.figure(figsize=(8, 6))
+plt.pie(df['target'].value_counts().values,
+        labels=['Price Down (0)', 'Price Up (1)'],
+        autopct='%1.1f%%')
+plt.title('Target Variable Distribution')
 plt.show()
 
-plt.figure(figsize=(10, 10)) 
-
-# As our concern is with the highly 
-# correlated features only so, we will visualize 
-# our heatmap as per that criteria only. 
+# Correlation heatmap
+print("\n--- Correlation Analysis ---")
+plt.figure(figsize=(10, 10))
 sb.heatmap(df.drop('Date', axis=1).corr() > 0.9, annot=True, cbar=False)
+plt.title('Highly Correlated Features (> 0.9)')
 plt.show()
 
-# This code is modified by Susobhan Akhuli
-
-features = df[['open-close', 'low-high', 'is_quarter_end']]
+# Prepare features and target
+print("\n--- Model Training ---")
+features_to_use = df[['open-close', 'low-high', 'is_quarter_end']]
 target = df['target']
 
+# Remove last row (has NaN target due to shift)
+features_to_use = features_to_use[:-1].values
+target = target[:-1].values
+
+# Scale features
 scaler = StandardScaler()
-features = scaler.fit_transform(features)
+features_scaled = scaler.fit_transform(features_to_use)
 
+# Train-test split
 X_train, X_test, y_train, y_test = train_test_split(
-    features, target, test_size=0.2, random_state=42)
-print(X_train.shape, X_test.shape)
+    features_scaled, target, test_size=0.2, random_state=42)
 
-models = [LogisticRegression(), SVC(
-  kernel='poly', probability=True), XGBClassifier()]
+print(f"Training set shape: {X_train.shape}")
+print(f"Test set shape: {X_test.shape}")
 
-for i in range(3):
-  models[i].fit(X_train, y_train)
+# Build models
+models = [
+    LogisticRegression(max_iter=1000),
+    SVC(kernel='poly', probability=True),
+]
 
-  print(f'{models[i]} : ')
-  print('Training Accuracy : ', metrics.roc_auc_score(
-    y_train, models[i].predict_proba(X_train)[:,1]))
-  print('Validation Accuracy : ', metrics.roc_auc_score(
-    y_test, models[i].predict_proba(X_test)[:,1]))
-  print()
+model_names = ['Logistic Regression', 'SVM (Polynomial)']
 
-  from sklearn.metrics import ConfusionMatrixDisplay
+if XGBOOST_AVAILABLE:
+    models.append(XGBClassifier(eval_metric='logloss', verbosity=0))
+    model_names.append('XGBoost')
 
-ConfusionMatrixDisplay.from_estimator(models[0], X_test, y_test)
+# Train and evaluate models
+print("\n--- Model Performance ---")
+best_model = None
+best_auc = -1
+
+for i, model in enumerate(models):
+    print(f"\n{model_names[i]}:")
+    model.fit(X_train, y_train)
+    
+    # Training metrics
+    train_pred_proba = model.predict_proba(X_train)[:, 1]
+    train_auc = metrics.roc_auc_score(y_train, train_pred_proba)
+    
+    # Testing metrics
+    test_pred_proba = model.predict_proba(X_test)[:, 1]
+    test_auc = metrics.roc_auc_score(y_test, test_pred_proba)
+    
+    test_accuracy = metrics.accuracy_score(y_test, model.predict(X_test))
+    
+    print(f"  Training AUC: {train_auc:.4f}")
+    print(f"  Testing AUC: {test_auc:.4f}")
+    print(f"  Test Accuracy: {test_accuracy:.4f}")
+    
+    # Track best model
+    if test_auc > best_auc:
+        best_auc = test_auc
+        best_model = (model_names[i], model)
+
+# Confusion Matrix for best model
+print(f"\n--- Confusion Matrix ({best_model[0]}) ---")
+plt.figure(figsize=(8, 6))
+ConfusionMatrixDisplay.from_estimator(best_model[1], X_test, y_test)
+plt.title(f'Confusion Matrix - {best_model[0]}')
 plt.show()
 
-# This code is modified by Susobhan Akhuli
+print("\n" + "=" * 60)
+print("✓ Stock price prediction completed successfully!")
+print(f"✓ Best model: {best_model[0]} (AUC: {best_auc:.4f})")
+print("=" * 60)
