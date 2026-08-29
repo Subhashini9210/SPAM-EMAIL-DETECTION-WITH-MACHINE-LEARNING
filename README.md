@@ -1,5 +1,10 @@
 📧 SPAM EMAIL DETECTION WITH MACHINE LEARNING
 
+![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
+![Repo Size](https://img.shields.io/github/repo-size/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING.svg)
+
 📌 Project Overview
 
 This project is a Spam Email Detection system using Machine Learning. It classifies email messages as either Spam or Ham (Not Spam).
