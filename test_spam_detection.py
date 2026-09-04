@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sb
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -14,9 +16,8 @@ from sklearn import metrics
 
 import warnings
 warnings.filterwarnings('ignore')
-import pytest
 
-# Test cases for the stock price prediction model
+# Test cases for the spam email detection model
 
 def test_imports():
     """Test that all required libraries can be imported."""
@@ -35,14 +36,12 @@ def test_sklearn_models():
     assert lr is not None
     assert svc is not None
     print("✓ All models instantiated successfully")
-
-
-@pytest.mark.skipif(not XGBOOST_AVAILABLE, reason="xgboost not installed")
-def test_xgboost_instantiation():
-    """Test XGBoost can be instantiated (skipped if not installed)."""
-    xgb = XGBClassifier(eval_metric='logloss', verbosity=0)
-    assert xgb is not None
-    print("✓ XGBoost instantiated successfully")
+    
+    # Only test XGBoost if available
+    if XGBOOST_AVAILABLE:
+        xgb = XGBClassifier(eval_metric='logloss', verbosity=0)
+        assert xgb is not None
+        print("✓ XGBoost instantiated successfully")
 
 
 def test_sample_data_preprocessing():
@@ -88,25 +87,16 @@ def test_model_training():
         SVC(kernel='poly', probability=True),
     ]
     
+    # Only add XGBoost if available
+    if XGBOOST_AVAILABLE:
+        models.append(XGBClassifier(eval_metric='logloss', verbosity=0))
+    
     for model in models:
         model.fit(X, y)
         predictions = model.predict(X)
         assert len(predictions) == len(y)
     
     print("✓ Model training works correctly")
-
-
-@pytest.mark.skipif(not XGBOOST_AVAILABLE, reason="xgboost not installed")
-def test_xgboost_training():
-    """Test XGBoost model can be trained (skipped if not installed)."""
-    np.random.seed(42)
-    X = np.random.randn(100, 3)
-    y = np.random.randint(0, 2, 100)
-    model = XGBClassifier(eval_metric='logloss', verbosity=0)
-    model.fit(X, y)
-    predictions = model.predict(X)
-    assert len(predictions) == len(y)
-    print("✓ XGBoost training works correctly")
 
 
 def test_model_prediction():
@@ -197,7 +187,7 @@ def test_csv_loading():
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("Running Stock Price Prediction Tests")
+    print("Running Spam Detection Tests")
     print("=" * 60 + "\n")
     
     test_imports()
@@ -208,11 +198,6 @@ if __name__ == "__main__":
     test_model_prediction()
     test_model_evaluation()
     test_csv_loading()
-    
-    # Run XGBoost tests directly if available
-    if XGBOOST_AVAILABLE:
-        test_xgboost_instantiation()
-        test_xgboost_training()
     
     print("\n" + "=" * 60)
     print("✓ All tests passed!")

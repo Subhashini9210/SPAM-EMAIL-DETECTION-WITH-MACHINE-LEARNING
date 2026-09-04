@@ -1,4 +1,4 @@
-name: Django CI
+name: Python CI
 
 on:
   push:
@@ -27,4 +27,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python -m pytest test_stock_price_prediction.py -v
