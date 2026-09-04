@@ -1,3 +1,4 @@
+[![Python CI](https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/actions/workflows/django.yml/badge.svg)](https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/actions/workflows/django.yml)
 📧 SPAM EMAIL DETECTION WITH MACHINE LEARNING
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
