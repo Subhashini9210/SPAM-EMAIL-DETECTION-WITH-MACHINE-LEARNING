@@ -45,20 +45,30 @@ def test_sklearn_models():
 
 
 def test_sample_data_preprocessing():
-    """Test data preprocessing pipeline."""
+    """Test data preprocessing pipeline with stronger checks."""
     # Create sample data
     np.random.seed(42)
     X = np.random.randn(100, 3)
     y = np.random.randint(0, 2, 100)
+
+    # Basic sanity check: labels should be binary
+    assert set(np.unique(y)).issubset({0, 1}), "y contains values outside {0,1}"
     
-    # Test train-test split
+    # Test stratified train-test split to preserve class distribution
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
+        X, y, test_size=0.2, random_state=42, stratify=y
     )
     
-    assert X_train.shape[0] == 80
-    assert X_test.shape[0] == 20
-    assert X_train.shape[1] == 3
+    # Check shapes
+    assert X_train.shape == (80, 3), f"Expected X_train shape (80,3), got {X_train.shape}"
+    assert X_test.shape == (20, 3), f"Expected X_test shape (20,3), got {X_test.shape}"
+    assert y_train.shape[0] == 80, f"Expected y_train length 80, got {y_train.shape[0]}"
+    assert y_test.shape[0] == 20, f"Expected y_test length 20, got {y_test.shape[0]}"
+
+    # Ensure labels in splits are still binary
+    assert set(np.unique(y_train)).issubset({0, 1})
+    assert set(np.unique(y_test)).issubset({0, 1})
+
     print("✓ Train-test split works correctly")
 
 
