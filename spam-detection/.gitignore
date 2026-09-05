@@ -1,0 +1,16 @@
+# Python bytecode and environments
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local data and generated output
+data/raw/*.csv
+!data/raw/.gitkeep
+outputs/*
+!outputs/.gitkeep
+!outputs/figures/
+outputs/figures/*
+!outputs/figures/.gitkeep
+
+# Editor settings
+.vscode/
