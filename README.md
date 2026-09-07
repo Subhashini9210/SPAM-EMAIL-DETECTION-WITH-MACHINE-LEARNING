@@ -1,149 +1,50 @@
-[![Python CI](https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/actions/workflows/django.yml/badge.svg)](https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/actions/workflows/django.yml)
-📧 SPAM EMAIL DETECTION WITH MACHINE LEARNING
+SPAM EMAIL DETECTION WITH MACHINE LEARNING
 
-![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
-![Repo Size](https://img.shields.io/github/repo-size/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING.svg)
+Overview
 
-📌 Project Overview
+This repository contains a spam email / SMS detection project. The production-ready spam detection code and tests are under the `spam-detection/` subdirectory. The root contains helper scripts and exploratory files.
 
-This project is a Spam Email Detection system using Machine Learning. It classifies email messages as either Spam or Ham (Not Spam).
+Quick status
 
-The project uses Natural Language Processing (NLP) techniques to convert email text into numerical features and a Machine Learning classification algorithm to predict whether an email is spam.
+- spam-detection/ is runnable and contains:
+  - src/spam_detection/download_data.py — downloader for the UCI SMS Spam Collection
+  - src/spam_detection/train.py — train / predict CLI, saves model to outputs/models/
+  - tests in spam-detection/tests/ and a focused test_train.py
+- CI workflow added to run tests on pushes and pull requests.
 
-🎯 Objectives
+How to reproduce (recommended)
 
-- Detect spam emails automatically.
-- Classify messages as Spam or Ham.
-- Preprocess and clean email text.
-- Convert text into numerical features using TF-IDF Vectorization.
-- Train a Machine Learning classification model.
-- Evaluate the performance of the trained model.
+1. Clone the repository
+   git clone https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING.git
+   cd SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
 
-🛠️ Technologies Used
+2. (Optional but recommended) Create and activate a virtual environment
+   python3 -m venv .venv
+   source .venv/bin/activate
 
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Natural Language Processing (NLP)
-- TF-IDF Vectorization
-- Machine Learning
+3. Install dependencies (root and subproject):
+   pip install -r requirements.txt
+   pip install -r spam-detection/requirements.txt
 
-📂 Project Structure
+4. Download dataset and train the spam model
+   cd spam-detection
+   python src/spam_detection/download_data.py
+   python src/spam_detection/train.py
 
-SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/
-│
-├── data/
-│   └── spam.csv
-│
-├── spam_detection.py
-├── test_spam_detection.py
-├── requirements.txt
-├── README.md
-└── .gitignore
+5. Run tests
+   # From repository root
+   python -m pytest -q
 
-«The file and folder names above should be changed to match the actual names in your repository.»
+Files added in this branch (prepare/submission)
+- LICENSE (MIT)
+- AUTHORS.md (placeholder)
+- report.md (project report template)
+- slides.md (presentation outline)
+- SUBMISSION_CHECKLIST.md (final submission checklist)
+- .github/workflows/python-tests.yml (CI to run pytest)
+- Updated README.md (this file)
 
-📊 Dataset
+Notes
 
-The dataset contains email/message text along with its corresponding label.
-
-The two main categories are:
-
-- Ham – legitimate messages
-- Spam – unwanted or suspicious messages
-
-Before training, the text data is cleaned and converted into numerical features.
-
-⚙️ Methodology
-
-The project follows these steps:
-
-1. Data Collection
-
-A labeled dataset containing spam and legitimate messages is used.
-
-2. Data Preprocessing
-
-The dataset is loaded and unnecessary or missing data is handled.
-
-3. Text Feature Extraction
-
-The email text is converted into numerical features using TF-IDF (Term Frequency–Inverse Document Frequency).
-
-4. Model Training
-
-The processed dataset is divided into training and testing data. A Machine Learning classification algorithm is trained using the training data.
-
-5. Model Evaluation
-
-The trained model is evaluated using the testing dataset.
-
-Evaluation can include:
-
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Confusion Matrix
-
-6. Spam Prediction
-
-The trained model can be used to predict whether a new email/message is Spam or Ham.
-
-🚀 Installation
-
-Clone the repository:
-
-git clone https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING.git
-
-Move into the project directory:
-
-cd SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
-
-Install the required libraries:
-
-pip install -r requirements.txt
-
-▶️ How to Run
-
-Run the main Python program:
-
-python spam_detection.py
-
-To run the tests:
-
-python test_spam_detection.py
-
-«Make sure these filenames match your actual Python files.»
-
-📈 Results
-
-The trained Machine Learning model predicts whether an input message is:
-
-Spam
-
-or
-
-Ham
-
-The model performance is evaluated using the test dataset.
-
-🔮 Future Enhancements
-
-- Improve model accuracy.
-- Add a graphical user interface (GUI).
-- Create a web application for spam detection.
-- Support larger and more diverse email datasets.
-- Compare multiple Machine Learning algorithms.
-- Deploy the model as an online application.
-
-👩‍💻 Author
-
-Subhashini
-
-📜 License
-
-This project is created for educational and academic purposes.
+- Please add your student metadata to AUTHORS.md and generate a PDF report from report.md (or replace it with your final report.pdf). Also add slides.pdf if you produce slides.
+- If you want the trained model artifact committed, respond and I will add the joblib file (note it will increase repo size).
