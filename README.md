@@ -115,11 +115,11 @@ Tests cover:
 ## 📝 For Final Submission
 
 1. **Fill in AUTHORS.md** with your:
-   - Full name
-   - Student/Roll number
-   - Supervisor name
-   - Institution/Department
-   - Contact email
+   - vippala subhashini
+   - aiml/23KP1A6159
+   - J.RAMU
+   - NRI IT INSTITUTE OF TECHNOLOGY 
+   - Vippalasubhashini134@gmail.com
 
 2. **Generate PDFs:**
    ```bash
