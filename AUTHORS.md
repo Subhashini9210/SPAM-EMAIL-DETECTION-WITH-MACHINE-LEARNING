@@ -1,12 +1,18 @@
 # Authors
 
-- Subhashini (GitHub: @Subhashini9210)
+- **Full name:** Subhashini  
+- **GitHub:** @Subhashini9210  
+- **Student / Roll number:** [To be filled in by student]  
+- **Supervisor:** [To be filled in by student]  
+- **Institution / Department:** [To be filled in by student]  
+- **Contact email:** [To be filled in by student]  
 
-Please update this file with your full name, student ID/roll number, supervisor name, and institution before final submission.
+## Project Details
 
-Suggested fields to add:
-- Full name:
-- Student / Roll number:
-- Supervisor:
-- Institution / Department:
-- Contact email:
+**Project Title:** Spam Email / SMS Detection using Machine Learning
+
+**Submission Date:** September 2026
+
+---
+
+**Instructions:** Please update the bracketed fields above with your actual details before final submission to your university.
