@@ -1,13 +1,32 @@
 # Spam Email / SMS Detection with Machine Learning
+ 
+A robust machine learning system for detecting spam SMS and email messages using Natural Language Processing (NLP), CountVectorizer feature extraction, and a Multinomial Naive Bayes classifier.
 
-A machine learning-based spam detection system using Multinomial Naive Bayes and bag-of-words text features on the UCI SMS Spam Collection dataset.
+ 
+
+## Key Features
+✅ SMS Spam Detection
+ 
+✅ NLP-based Text Preprocessing
+
+✅ Bag-of-Words Feature Engineering
+
+✅ Multinomial Naive Bayes Classification
+
+✅ Cross Validation and Model Evaluation
+
+✅ Automated Testing with PyTest
+
+✅ GitHub Actions CI/CD Pipeline
+
+✅ Easy-to-use Command Line Interface
 
 ## 📊 Quick Overview
-
-- **Model:** Multinomial Naive Bayes with unigrams + bigrams
-- **Dataset:** UCI SMS Spam Collection (5,574 messages)
-- **Accuracy:** [Run train.py to see results]
-- **Status:** ✅ Fully tested with CI/CD pipeline
+- **ACCURACY:** Generated after training
+- **Precision:** Generated after training
+- **Recall:** Generated after training
+- 
+- **F1 Score:** Generated after training
 
 ## 🚀 Quick Start
 
@@ -105,6 +124,25 @@ Tests cover:
 - Prediction on new messages
 - UCI dataset parsing
 
+## Example Predictions
+
+### Example 1
+
+Input:
+Congratulations! You have won a free gift voucher. Claim now!
+
+Prediction:
+
+Spam
+
+### Example 2
+ 
+Input:
+Hi, are we still meeting at 5 PM today?
+
+Prediction:
+Ham
+
 ## 📖 Submission Files
 
 - **`report.md`** — Full project report (convert to `report.pdf`)
@@ -114,12 +152,15 @@ Tests cover:
 
 ## 📝 For Final Submission
 
-1. **Fill in AUTHORS.md** with your:
-   - vippala subhashini
-   - aiml/23KP1A6159
-   - J.RAMU
-   - NRI IT INSTITUTE OF TECHNOLOGY 
-   - Vippalasubhashini134@gmail.com
+1. **Fill in AUTHORS.md**  - Subhashini Vippala
+
+   B.Tech - Artificial Intelligence and Machine Learning
+
+   J. Ramu NRI Institute of Technology
+
+   GitHub:https://github.com/Subhashini9210
+
+   Project: Spam Email/SMS Detection using Machine Learning
 
 2. **Generate PDFs:**
    ```bash
