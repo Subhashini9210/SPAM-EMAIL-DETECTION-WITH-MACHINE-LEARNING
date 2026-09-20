@@ -1,13 +1,14 @@
 # Spam Email / SMS Detection with Machine Learning
- 
-A robust machine learning system for detecting spam SMS and email messages using Natural Language Processing (NLP), CountVectorizer feature extraction, and a Multinomial Naive Bayes classifier.
 
  
+A robust machine learning system for detecting spam SMS and email messages using Natural Language Processing (NLP), CountVectorizer feature extraction, and a Multinomial Naive Bayes classifier.
+ 
+## 🚀 Key Features
 
-## Key Features
+
 ✅ SMS Spam Detection
  
-✅ NLP-based Text Preprocessing
+✅ NLP-Based Text Preprocessing
 
 ✅ Bag-of-Words Feature Engineering
 
@@ -19,171 +20,386 @@ A robust machine learning system for detecting spam SMS and email messages using
 
 ✅ GitHub Actions CI/CD Pipeline
 
-✅ Easy-to-use Command Line Interface
+✅ Command-Line Prediction Interface
 
+✅ Model Persistence Using Joblib
+
+---
 ## 📊 Quick Overview
-- **ACCURACY:** Generated after training
-- **Precision:** Generated after training
-- **Recall:** Generated after training
-- 
-- **F1 Score:** Generated after training
 
-## 🚀 Quick Start
+| Attribute | Details |
+|------------|------------|
+| Model | Multinomial Naive Bayes |
+| Feature Extraction | CountVectorizer (Unigrams + Bigrams) |
+| Dataset | UCI SMS Spam Collection |
+| Dataset Size | 5,574 Messages |
+| Spam Messages | 747 |
+| Ham Messages | 4,827 |
+| Testing | PyTest |
+| CI/CD | GitHub Actions |
+| Outputs | Trained Model, Metrics, Confusion Matrix |
+---
+## 🎯 Project Objective
+The goal of this project is to build a machine learning model capable of automatically classifying SMS and email messages as:
+- **Spam** 🚫
+- **Ham (Legitimate Message)** ✅
+The system applies NLP preprocessing and machine learning classification techniques to detect unwanted or fraudulent messages effectively.
+---
+## 🧠 Machine Learning Workflow
+### Step 1: Data Collection
+The project uses the UCI SMS Spam Collection dataset containing 5,574 labelled messages.
+| Class | Count |
+|---------|---------|
+| Spam | 747 |
+| Ham | 4,827 |
+---
+### Step 2: Text Preprocessing
+The raw text undergoes preprocessing before training.
 
-```bash
-# Clone and setup
-git clone https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING.git
-cd SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
+Tasks performed:
 
-# Create virtual environment
-python3 -m venv .venv
-source .venv/bin/activate  # On Windows: .\.venv\Scripts\Activate.ps1
+- Convert text to lowercase
+- Remove stop words
+- Tokenisation
+- Normalisation
+- Text cleaning
+Example:
 
-# Install dependencies
-pip install -r requirements.txt
-pip install -r spam-detection/requirements.txt
+**Original Message**
 
-# Download data and train model
-cd spam-detection
-python src/spam_detection/download_data.py
-python src/spam_detection/train.py
-
-# Run tests
-cd ..
-python -m pytest -q
-
-# Make a prediction
-cd spam-detection
-python src/spam_detection/train.py --predict "Congratulations! You won a free prize."
+```text
+Congratulations! You have won a FREE prize!
 ```
 
+**Processed Text**
+ 
+```text
+congratulations won free prize
+```
+ 
+---
+ 
+### Step 3: Feature Extraction
+ 
+The cleaned text is converted into numerical features using:
+ 
+```python
+CountVectorizer()
+```
+ 
+Using:
+ 
+- Unigrams
+- Bigrams
+  
+Example:
+
+ 
+```text
+free prize winner
+
+Becomes a numerical vector that machine learning algorithms can process.
+ 
+### Step 4: Model Training
+ 
+Classifier used:
+ 
+```python
+MultinomialNB(alpha=0.5)
+
+Reasons for choosing Naive Bayes:
+ 
+- Fast training
+- Efficient prediction
+- Excellent performance on text classification problems
+- Low computational cost
+ 
+### Step 5: Model Evaluation
+ 
+Evaluation metrics include:
+ 
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+- Confusion Matrix
+- Cross Validation Score
+ 
+The trained model is validated using:
+ 
+```text
+5-Fold Cross Validation
+ 
 ## 📁 Project Structure
 
+```text
+SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/
+│
+├── .github/
+│ └── workflows/
+│
+├── spam-detection/
+│ ├── src/spam_detection/
+│ │ ├── train.py
+│ │ └── download_data.py
+│ │
+│ ├── tests/
+│ │ ├── test_train.py
+│ │ └── conftest.py
+│ │
+│ ├── data/raw/
+│ ├── outputs/
+│ └── requirements.txt
+│
+├── AUTHORS.md
+├── report.md
+├── slides.md
+├── SUBMISSION_CHECKLIST.md
+├── LICENSE
+├── README.md
+└── requirements.txt
 ```
-.
-├── spam-detection/              # Main ML project
-│   ├── src/spam_detection/
-│   │   ├── train.py            # Train and predict CLI
-│   │   └── download_data.py    # Download UCI dataset
-│   ├── tests/
-│   │   ├── test_train.py       # Unit tests
-│   │   └── conftest.py         # Pytest config
-│   ├── data/raw/               # Downloaded dataset (git-ignored)
-│   ├── outputs/                # Generated models & figures (git-ignored)
-│   └── requirements.txt        # ML dependencies
-├── AUTHORS.md                   # Student submission metadata
-├── report.md                    # Full project report (convert to PDF)
-├── slides.md                    # Presentation outline (convert to PDF)
-├── SUBMISSION_CHECKLIST.md     # Pre-submission verification
-├── LICENSE                      # MIT License
-├── README.md                    # This file
-└── requirements.txt             # Root dependencies
+---
+
+## ⚙️ Installation
+ 
+### Clone Repository
+ 
+```bash
+git clone https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING.git
+ 
+cd SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
+```
+ 
+### Create Virtual Environment
+ 
+Linux/macOS:
+ 
+```bash
+python3 -m venv .venv
+ 
+source .venv/bin/activate
 ```
 
-## 🔧 How It Works
+Windows PowerShell:
+ 
+```powershell
+python -m venv .venv
+ 
+.\.venv\Scripts\Activate.ps1
+```
+ 
+### Install Dependencies
+ 
+```bash
+pip install -r requirements.txt
+ 
+pip install -r spam-detection/requirements.txt
+```
 
-### 1. Data Download
-Downloads 5,574 labelled SMS messages from UCI:
-- **Spam:** 747 messages (13%)
-- **Ham (Legitimate):** 4,827 messages (87%)
+---
+ 
+## ▶️ Running the Project
+ 
+### Download Dataset
+ 
+```bash
+cd spam-detection
+ 
+python src/spam_detection/download_data.py
+ 
+### Train Model
+ 
+```bash
+python src/spam_detection/train.py
+ 
+ 
+## 🔮 Make Predictions
+ 
+Example:
+ 
+```bash
+python src/spam_detection/train.py --predict "Congratulations! You won a free prize."
+```
+ 
+Expected Output:
+ 
+```text
+Prediction: Spam
 
-### 2. Preprocessing
-- Stop word removal (English)
-- Tokenization and normalization
-- Stratified train-test split (80/20)
+Another Example:
+ 
+Input:
+ 
+```text
+Hi, are we meeting at 5 PM today?
+ 
+Output:
+ 
+```text
+Prediction: Ham
+```
+---
+## 📈 Results
+After training, the system generates:
 
-### 3. Model Training
-- **Vectorization:** CountVectorizer with unigrams & bigrams
-- **Classifier:** Multinomial Naive Bayes (alpha=0.5)
-- **Evaluation:** Weighted F1-score with 5-fold cross-validation
+- Hold-Out Accuracy
+- Precision Score
+- Recall Score
+- F1 Score
+- Classification Report
+- Cross Validation Results
+- Confusion Matrix
+ 
+### Performance Metrics
 
-### 4. Outputs Generated
-- `outputs/models/spam_classifier.joblib` — Trained model
-- `outputs/figures/confusion_matrix.png` — Confusion matrix plot
+| Metric | Score |
+|----------|----------|
+| Accuracy | Generated After Training |
+| Precision | Generated After Training |
+| Recall | Generated After Training |
+| F1 Score | Generated After Training |
+ 
+Replace the above values with the actual results from your training run.
+ 
+---
+ 
+## 📸 Screenshots
+ 
+### Confusion Matrix
+ 
+Add:
+```text
+Figure_1.png
+```
+ 
+### Model Performance
+ 
+Add:
 
-## 📊 Results
+```text
+Figure_2.png
+```
 
-Run the training to see:
-- Hold-out accuracy
-- Weighted F1-score
-- 5-fold cross-validation metrics
-- Confusion matrix visualization
-- Classification report (precision, recall, F1 per class)
-
+---
+ 
 ## 🧪 Testing
-
-All tests are automated via GitHub Actions CI/CD:
-
+ 
+All tests are automated using PyTest and GitHub Actions.
+ 
+Run tests:
+ 
 ```bash
 python -m pytest -q spam-detection/tests/
 ```
-
-Tests cover:
-- Data validation and error handling
-- Model training and evaluation
-- Prediction on new messages
-- UCI dataset parsing
-
-## Example Predictions
-
-### Example 1
-
-Input:
-Congratulations! You have won a free gift voucher. Claim now!
-
-Prediction:
-
-Spam
-
-### Example 2
  
-Input:
-Hi, are we still meeting at 5 PM today?
-
-Prediction:
-Ham
+Tests cover:
+ 
+- Data Validation
+- Dataset Parsing
+- Error Handling
+- Model Training
+- Model Evaluation
+- Prediction Functionality
+ 336
+  ---
+## 💼 Skills Demonstrated
+ 
+This project demonstrates:
+ 
+- Python Programming
+- Machine Learning
+- Natural Language Processing (NLP)
+- Text Classification
+- Feature Engineering
+- Data Cleaning and Preprocessing
+- Model Evaluation
+- Cross Validation
+- Software Testing
+- GitHub Actions CI/CD
+- Version Control with Git and GitHub
+ 
+---
 
 ## 📖 Submission Files
+ 
+| File | Description |
+|--------|--------|
+| report.md | Complete project report |
+| slides.md | Presentation slides outline |
+| AUTHORS.md | Author information |
+| SUBMISSION_CHECKLIST.md | Submission verification checklist |
+ 
+---
+ 
+## 📝 Author
 
-- **`report.md`** — Full project report (convert to `report.pdf`)
-- **`slides.md`** — 10-slide presentation outline (convert to `slides.pdf`)
-- **`AUTHORS.md`** — Student metadata (fill in your details)
-- **`SUBMISSION_CHECKLIST.md`** — Pre-submission verification checklist
+### Subhashini Vippala
+ 
+Bachelor of Technology (B.Tech)
+ 
+Artificial Intelligence and Machine Learning
+ 
+J. Ramu NRI Institute of Technology
+ 
+GitHub:
+ 
+https://github.com/Subhashini9210
+ 
+Project:
 
-## 📝 For Final Submission
+Spam Email / SMS Detection Using Machine Learning
+ 
+## 🔮 Future Enhancements
 
-1. **Fill in AUTHORS.md**  - Subhashini Vippala
-
-   B.Tech - Artificial Intelligence and Machine Learning
-
-   J. Ramu NRI Institute of Technology
-
-   GitHub:https://github.com/Subhashini9210
-
-   Project: Spam Email/SMS Detection using Machine Learning
-
-2. **Generate PDFs:**
-   ```bash
-   # Report
-   pandoc report.md -o report.pdf
-   
-   # Slides (use your preferred tool: Marp, Reveal.js, PowerPoint, etc.)
-   ```
-
-3. **Run experiments** to populate metrics in report.md
-
-4. **Verify submission checklist** before submitting to your university
-
+Future versions may include:
+ 
+- Logistic Regression Classifier
+- Support Vector Machine (SVM)
+- Random Forest Classifier
+- Streamlit Web Application
+- FastAPI Deployment
+- Deep Learning with LSTM Networks
+- Transformer-Based Models (BERT)
+- Real-Time Spam Detection API
+- Email Integration Support
+ 
+---
+ 
 ## 🔗 References
+ 
+1. UCI SMS Spam Collection Dataset
 
-- [UCI SMS Spam Collection](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
-- [scikit-learn Text Feature Extraction](https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction)
-- [scikit-learn Naive Bayes](https://scikit-learn.org/stable/modules/naive_bayes.html)
+https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+ 
+2. Scikit-Learn Text Feature Extraction
+ 
+https://scikit-learn.org/stable/modules/feature_extraction.html
+ 
+3. Scikit-Learn Naive Bayes
 
+https://scikit-learn.org/stable/modules/naive_bayes.html
+---
+ 
 ## 📄 License
 
-MIT License — See [LICENSE](LICENSE) file for details
+ 
+This project is licensed under the MIT License.
 
+
+See the LICENSE file for details.
+ ---
+ 
 ## ✅ CI/CD Status
+ 
+GitHub Actions automatically runs tests on every push and pull request. 
 
-GitHub Actions automatically runs tests on every push. View workflow status: [Actions](https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/actions)
+The workflow ensures:
+ 
+ - Automated Testing
+- Dependency Validation
+- Continuous Integration
+- Project Stability
+ 
+View workflow status from the Actions tab of the repository.
+
