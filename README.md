@@ -5,6 +5,36 @@ A machine learning-based text classification system that automatically classifie
 The project includes data validation, text feature extraction, model training, evaluation, model persistence, automated testing, and GitHub Actions CI.
 
 ---
+2. Features
+
+Add:
+
+Spam/Ham classification
+Text preprocessing
+TF-IDF or CountVectorizer feature extraction
+Multinomial Naive Bayes classification
+Model evaluation
+Django web interface
+Real-time prediction
+Model saving/loading
+
+ 3. Technologies used
+
+For example:
+
+Python
+Pandas
+NumPy
+Scikit-learn
+NLTK
+Django
+HTML
+CSS
+JavaScript
+Matplotlib
+Seaborn
+Joblib
+Git & GitHub 
 
 ## 📌 Project Overview
 
@@ -14,10 +44,97 @@ This project uses **Machine Learning and Natural Language Processing (NLP)** to 
 
 * 🚫 **Spam** — unwanted or suspicious message
 * ✅ **Ham** — legitimate message
+SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/
+│
+├── spam-detection/
+
+│   ├── settings.py
+
+│   ├── urls.py
+
+│   └── ...
+
+│
+
+├── detector/
+
+│   ├── views.py
+
+│   ├── urls.py
+
+│   └── ...
+
+│
+
+├── templates/
+
+│   └── detector/
+
+│       └── index.html
+
+│
+
+├── static/
+
+│   └── detector/
+
+│     ├── style.css
+
+│       └── script.js
+
+│
+
+├── model/
+
+│   ├── model.pkl
+
+│   └── vectorizer.pkl
+
+│
+
+├── manage.py
+
+├── requirements.txt
+
+├── .gitignore
+
+├── LICENSE
+
+└── README.md
 
 The system converts text into numerical features using **CountVectorizer** and uses a **Multinomial Naive Bayes** classifier to make the final prediction.
+ 5. Dataset
 
+Explain:
+
+Dataset name
+Number of messages/emails
+Spam and ham classes
+Dataset source
+How the data was split into training/testing
 ---
+6. Machine-learning workflow
+Dataset
+   ↓
+Data Validation
+   ↓
+Text Cleaning
+   ↓
+Feature Extraction
+   ↓
+CountVectorizer
+   ↓
+Train/Test Split
+   ↓
+Multinomial Naive Bayes
+   ↓
+Model Prediction
+   ↓
+Model Evaluation
+   ↓
+Save Trained Model
+   ↓
+Spam / Ham Prediction
 
 ## 🎯 Project Objectives
 
