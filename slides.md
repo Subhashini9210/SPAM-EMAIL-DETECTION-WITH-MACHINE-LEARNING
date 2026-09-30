@@ -185,7 +185,7 @@ python src/spam_detection/train.py --predict "Congratulations! You won a free pr
 
 ### Contact
 - **GitHub:** @Subhashini9210
-- **Email:** [vippalasubhashini 134@gmail.com]
+- **Email:** [vippalasubhashini134@gmail.com]
 - **Repository:** https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
 
 ---
