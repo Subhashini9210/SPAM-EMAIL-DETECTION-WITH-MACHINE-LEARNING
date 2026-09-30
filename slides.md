@@ -6,8 +6,8 @@
 
 - **Project:** Spam Email / SMS Detection using Machine Learning
 - **Author:** Subhashini (@Subhashini9210)
-- **Supervisor:** [Your Supervisor Name]
-- **Institution:** [Your University / Department]
+- **Supervisor:** [J.Ramu]
+- **Institution:** [Nri it institute of technology/ AIML]
 - **Date:** September 2026
 - **GitHub:** https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
 
@@ -185,7 +185,7 @@ python src/spam_detection/train.py --predict "Congratulations! You won a free pr
 
 ### Contact
 - **GitHub:** @Subhashini9210
-- **Email:** [Your Email]
+- **Email:** [vippalasubhashini 134@gmail.com]
 - **Repository:** https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
 
 ---
