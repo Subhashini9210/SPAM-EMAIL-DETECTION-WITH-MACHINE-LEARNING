@@ -35,6 +35,7 @@ Matplotlib
 Seaborn
 Joblib
 Git & GitHub 
+
 4. Django application:
 
  Enter email/message
