@@ -35,7 +35,19 @@ Matplotlib
 Seaborn
 Joblib
 Git & GitHub 
+4. Django application:
 
+ Enter email/message
+        ↓
+Django frontend
+        ↓
+views.py
+        ↓
+vectorizer.pkl
+        ↓
+model.pkl
+        ↓
+Spam / Ham result
 ## 📌 Project Overview
 
 Spam messages are unwanted messages that may contain advertisements, scams, fraudulent offers, or other potentially harmful content.
