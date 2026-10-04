@@ -5,7 +5,7 @@
 - **Student / Roll number:** [23KP1A6159]  
 - **Supervisor:** [J.RAMU SIR]  
 - **Institution / Department:** [NRI IT institute of technology/ AIML]  
-- **Contact email:** [vippalasubhashini 134@gmail.com]  
+- **Contact email:** [vippalasubhashini134@gmail.com]  
 
 ## Project Details
 
