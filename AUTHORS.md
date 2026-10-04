@@ -2,10 +2,10 @@
 
 - **Full name:** Subhashini  
 - **GitHub:** @Subhashini9210  
-- **Student / Roll number:** [Enter your roll number]  
-- **Supervisor:** [Enter supervisor name]  
-- **Institution / Department:** [Enter institution / department]  
-- **Contact email:** [Enter your email]  
+- **Student / Roll number:** [23KP1A6159]  
+- **Supervisor:** [J.RAMU SIR]  
+- **Institution / Department:** [NRI IT institute of technology/ AIML]  
+- **Contact email:** [vippalasubhashini 134@gmail.com]  
 
 ## Project Details
 
