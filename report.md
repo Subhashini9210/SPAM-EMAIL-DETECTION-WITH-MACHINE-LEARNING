@@ -12,14 +12,16 @@ Subhashini (@Subhashini9210)
 
 ## Abstract
 
-This project implements a machine learning-based spam detection system for SMS messages using the UCI SMS Spam Collection dataset. The system employs a Multinomial Naive Bayes classifier with bag-of-words text representation (unigrams and bigrams) to classify messages as spam or legitimate (ham). The model achieves strong classification performance on a stratified train-test split, with cross-validation metrics demonstrating robust generalization. This report details the methodology, experimental setup, results, and discusses limitations and potential improvements for deployment in production systems.
+This project implements a machine learning-based spam detection system for SMS messages using the UCI SMS Spam Collection dataset. The system employs a Multinomial Naive Bayes classifier with bag-of-words text features to classify incoming messages as spam or ham.
+
+The project includes dataset validation, model training, evaluation, confusion-matrix visualization, and persistence of the trained model. It is designed to be easily reproducible and includes automated tests and CI configuration for verification.
 
 ---
 
 ## 1. Introduction
 
 ### Problem Statement
-Email and SMS spam remains a significant challenge in digital communication, consuming bandwidth, compromising user experience, and potentially facilitating phishing and malware attacks. Manual filtering is impractical at scale, necessitating automated detection systems.
+Email and SMS spam remains a significant challenge in digital communication, consuming bandwidth, compromising user experience, and potentially facilitating phishing and malware attacks. Manual filtering is impractical at scale, which motivates automated classification using machine learning.
 
 ### Motivation and Applications
 - **User Experience:** Reduces clutter in inboxes and messaging applications
@@ -117,26 +119,33 @@ python -m pytest -q
 
 ## 6. Results
 
+Important: populate these values by running the project locally before final submission:
+
+```bash
+cd spam-detection
+python src/spam_detection/train.py
+```
+
 ### Hold-Out Set Metrics (20% Test Set)
-- **Accuracy:** [To be populated by running train.py]
-- **Weighted F1-Score:** [To be populated by running train.py]
-- **Precision (per class):** See Classification Report below
+- **Accuracy:** [Run the model and insert the actual value]
+- **Weighted F1-Score:** [Run the model and insert the actual value]
+- **Precision (per class):** [Insert values from the classification report]
 
 ### Cross-Validation Metrics
-- **5-Fold Cross-Validation Weighted F1:** [To be populated by running train.py]
+- **5-Fold Cross-Validation Weighted F1:** [Run the model and insert the actual value]
 
 ### Confusion Matrix
 Generated figure saved to: `spam-detection/outputs/figures/confusion_matrix.png`
 
 **Interpretation:**
 - True Negatives (TN): Legitimate messages correctly classified
-- False Positives (FP): Legitimate messages misclassified as spam (user impact: message loss)
-- False Negatives (FN): Spam messages misclassified as legitimate (user impact: unwanted messages)
+- False Positives (FP): Legitimate messages misclassified as spam
+- False Negatives (FN): Spam messages misclassified as legitimate
 - True Positives (TP): Spam messages correctly classified
 
 ### Classification Report
-```
-[To be populated by running: python src/spam_detection/train.py]
+```text
+[Insert the actual output from: python src/spam_detection/train.py]
 ```
 
 ---
@@ -155,7 +164,7 @@ Generated figure saved to: `spam-detection/outputs/figures/confusion_matrix.png`
 1. **Feature Engineering:** TF-IDF weighting, word embeddings (Word2Vec, GloVe)
 2. **Advanced Models:** Logistic Regression, SVM, Gradient Boosting, Neural Networks
 3. **Ensemble Methods:** Combine multiple classifiers for robustness
-4. **Cost-Sensitive Learning:** Assign higher cost to false positives (user frustration)
+4. **Cost-Sensitive Learning:** Assign higher cost to false positives
 5. **Active Learning:** Continuously retrain on new labelled examples
 6. **Deployment:** API wrapper for real-time classification, monitoring pipeline
 
@@ -163,7 +172,7 @@ Generated figure saved to: `spam-detection/outputs/figures/confusion_matrix.png`
 
 ## 8. Conclusion
 
-This project successfully demonstrates a machine learning approach to SMS spam detection using Multinomial Naive Bayes on the UCI SMS Spam Collection. The model provides a solid baseline with good interpretability and speed. While the bag-of-words approach has inherent limitations, the system achieves competitive performance on the benchmark dataset and provides a foundation for more sophisticated approaches. Future work should explore deep learning models and incorporate additional signal sources (metadata, sender reputation) for production deployment.
+This project demonstrates a practical machine learning approach to SMS spam detection using Multinomial Naive Bayes on the UCI SMS Spam Collection. The approach is fast, interpretable, and well-suited as a baseline for text classification. The workflow includes validation, feature extraction, training, evaluation, and deployment-ready model persistence.
 
 ---
 
@@ -182,7 +191,7 @@ This project successfully demonstrates a machine learning approach to SMS spam d
    O'Reilly Media, Inc.
 
 5. Spam Detection Survey: Recent Approaches and Challenges  
-   (Refer to recent NLP conferences: ACL, EMNLP, NAACL)
+   (Use a relevant conference or survey paper as required by your university)
 
 ---
 
@@ -190,6 +199,5 @@ This project successfully demonstrates a machine learning approach to SMS spam d
 ```bash
 pandoc report.md -o report.pdf
 ```
-Or export directly from your editor (VS Code, Markdown Preview, etc.).
 
 Then commit `report.pdf` to the repository and verify it renders correctly on GitHub.
