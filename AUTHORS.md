@@ -2,10 +2,10 @@
 
 - **Full name:** Subhashini  
 - **GitHub:** @Subhashini9210  
-- **Student / Roll number:** [To be filled in by student]  
-- **Supervisor:** [To be filled in by student]  
-- **Institution / Department:** [To be filled in by student]  
-- **Contact email:** [To be filled in by student]  
+- **Student / Roll number:** [Enter your roll number]  
+- **Supervisor:** [Enter supervisor name]  
+- **Institution / Department:** [Enter institution / department]  
+- **Contact email:** [Enter your email]  
 
 ## Project Details
 
@@ -15,4 +15,4 @@
 
 ---
 
-**Instructions:** Please update the bracketed fields above with your actual details before final submission to your university.
+**Instructions:** Fill in the bracketed fields above before final submission to your university.
