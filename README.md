@@ -208,10 +208,10 @@ The trained model was evaluated on a stratified 80/20 train-test split.
 
 | Metric | Score |
 |----------|---------|
-| Accuracy | Add Your Accuracy |
-| Precision | Add Your Precision |
-| Recall | Add Your Recall |
-| F1 Score | Add Your F1 Score |
+| Accuracy | 97.86%|
+| Precision | 98% |
+| Recall | 98% |
+| F1 Score | 98% |
 
 ### Confusion Matrix
 
