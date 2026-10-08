@@ -293,4 +293,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Conclusion
 
-This project demonstrates a robust machine learning workflow for spam detection using text classification, data validation, evaluation, and model persistence. It is a strong end-to-end example of a practical NLP classification solution and can serve as a solid foundation for further enhancement.A 97.86% accuracy spam detection model is a strong result for a student machine learning project and looks good on a resume and GitHub portfolio.
+This project demonstrates a robust machine learning workflow for spam detection using text classification, data validation, evaluation, and model persistence. It is a strong end-to-end example of a practical NLP classification solution and can serve as a solid foundation for further enhancement.Machine Learning based Spam Email Detection System with 97.86% accuracy using NLP, CountVectorizer and Multinomial Naive Bayes.
+
