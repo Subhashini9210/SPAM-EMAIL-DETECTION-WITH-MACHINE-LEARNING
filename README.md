@@ -251,8 +251,8 @@ Machine Learning & Python Developer
 
 | Actual \ Predicted | Ham | Spam |
 |--------------------|-----|------|
-| Ham                | 961 | 5    |
-| Spam               | 9   | 140  |
+| Ham                | 276 | 4    |
+| Spam               | 8   | 272  |
 
 These results indicate that the classifier performs very well and is suitable as a baseline solution for spam detection tasks.
 
