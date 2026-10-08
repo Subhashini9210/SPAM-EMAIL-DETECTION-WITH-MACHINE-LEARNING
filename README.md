@@ -202,16 +202,50 @@ python -m pytest -q
 
 The trained model was evaluated on a stratified 80/20 train-test split.
 
-### Results
+## Results
 
-| Metric | Result |
-|--------|--------|
-| Accuracy | 98.44% |
-| Weighted F1 Score | 0.9874 |
-| 5-Fold Cross-Validation Weighted F1 | 0.9868 |
-| Precision (Spam) | 0.97 |
-| Recall (Spam) | 0.94 |
-| F1 Score (Spam) | 0.95 |
+### Model Performance
+
+| Metric | Score |
+|----------|---------|
+| Accuracy | Add Your Accuracy |
+| Precision | Add Your Precision |
+| Recall | Add Your Recall |
+| F1 Score | Add Your F1 Score |
+
+### Confusion Matrix
+
+Add an image of your confusion matrix here.
+
+## Screenshots
+
+### Home Page
+
+screenshots/home.png
+
+### Spam Detection Result
+
+screenshots/result.png
+
+## Live Demo
+
+Coming Soon
+
+## Future Enhancements
+
+- Deep Learning based spam detection
+- BERT Transformer model
+- Real-time Gmail integration
+- Multi-language spam detection
+- Web application deployment
+- Mobile application support
+
+## Author
+
+**Subhashini**
+
+Machine Learning & Python Developer
+
 
 ### Confusion Matrix
 
