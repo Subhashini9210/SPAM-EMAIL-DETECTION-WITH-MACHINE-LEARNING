@@ -1,23 +1,37 @@
 # 📧 Spam Email Detection Using Machine Learning
 
-A machine learning-based text classification system that automatically classifies messages as **Spam** or **Ham (Legitimate)** using Natural Language Processing (NLP), CountVectorizer, and a Multinomial Naive Bayes classifier.
+A machine learning-based text classification project that identifies whether a message is `Spam` or `Ham` (legitimate email/SMS). The project uses natural language processing, `CountVectorizer`, and a `Multinomial Naive Bayes` classifier to build a reliable baseline spam detector.
 
-The project includes data validation, text feature extraction, model training, evaluation, model persistence, automated testing, and GitHub Actions CI.
+## Overview
 
----
-2. Features
+Spam detection is a classic text classification problem. In this project, email and SMS text is converted into numerical features and passed to a supervised machine learning model that learns patterns associated with spam and non-spam messages.
+
+This repository implements a complete training pipeline with:
+
+- dataset validation
+- text cleaning and preprocessing
+- feature extraction using `CountVectorizer`
+- model training using `MultinomialNB`
+- evaluation using accuracy, F1-score, and confusion matrix
+- model persistence using `joblib`
+- automated tests with `pytest`
+- CI using GitHub Actions
+
+## Features
 
 - Text preprocessing and cleaning
-- Bag-of-words feature extraction using CountVectorizer
-- Multinomial Naive Bayes classifier
+- Bag-of-words feature extraction using `CountVectorizer`
+- Multinomial Naive Bayes classification
 - Train/test split with stratification
 - Cross-validation evaluation
 - Confusion matrix generation
-- Model persistence using joblib
-- Automated testing with pytest
-- GitHub Actions CI workflow
+- Model persistence with `joblib`
+- Automated testing with `pytest`
+- CI workflow with GitHub Actions
+- Command-line prediction support
 
 ## Project Structure
+
 ```text
 SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/
 ├── AUTHORS.md
@@ -50,322 +64,145 @@ SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/
 │   └── tests/
 │       ├── conftest.py
 │       └── test_train.py
+```
 
- 3. Technologies used
+## Technologies Used
 
-For example:
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Matplotlib
+- Joblib
+- PyTest
+- Git & GitHub
+- GitHub Actions
 
-Python
-Pandas
-NumPy
-Scikit-learn
-NLTK
-Django
-HTML
-CSS
-JavaScript
-Matplotlib
-Seaborn
-Joblib
-Git & GitHub 
+## Dataset
 
-4. Django application:
+The project is designed to work with a labeled text dataset containing:
 
- Enter email/message
- 
-        ↓
-        
- Django frontend
+- `text`: the message content
+- `label`: the class label (`spam` or `ham`)
 
-        ↓
-        
-   views.py
+The reference dataset used for this project is the UCI SMS Spam Collection.
 
-        ↓
-        
- vectorizer.pkl
+### Dataset Statistics
 
-        ↓
-        
-   model.pkl
+- Total messages: 5,574
+- Spam messages: 747
+- Ham messages: 4,827
+- Split: 80/20 stratified train-test split
 
-        ↓
-        
-Spam / Ham result
-
-## 📌 Project Overview
-
-Spam messages are unwanted messages that may contain advertisements, scams, fraudulent offers, or other potentially harmful content.
-
-This project uses **Machine Learning and Natural Language Processing (NLP)** to analyze the text of a message and classify it into one of two categories:
-
-* 🚫 **Spam** — unwanted or suspicious message
-* ✅ **Ham** — legitimate message
-SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/
-│
-├── spam-detection/
-
-│   ├── settings.py
-
-│   ├── urls.py
-
-│   └── ...
-
-│
-
-├── detector/
-
-│   ├── views.py
-
-│   ├── urls.py
-
-│   └── ...
-
-│
-
-├── templates/
-
-│   └── detector/
-
-│       └── index.html
-
-│
-
-├── static/
-
-│   └── detector/
-
-│     ├── style.css
-
-│       └── script.js
-
-│
-
-├── model/
-
-│   ├── model.pkl
-
-│   └── vectorizer.pkl
-
-│
-
-├── manage.py
-
-├── requirements.txt
-
-├── .gitignore
-
-├── LICENSE
-
-└── README.md
-
-The system converts text into numerical features using **CountVectorizer** and uses a **Multinomial Naive Bayes** classifier to make the final prediction.
- 5. Dataset
-
-Explain:
-
-Dataset name
-Number of messages/emails
-Spam and ham classes
-Dataset source
-How the data was split into training/testing
----
-6. Machine-learning workflow
-Dataset
-   ↓
-Data Validation
-   ↓
-Text Cleaning
-   ↓
-Feature Extraction
-   ↓
-CountVectorizer
-   ↓
-Train/Test Split
-   ↓
-Multinomial Naive Bayes
-   ↓
-Model Prediction
-   ↓
-Model Evaluation
-   ↓
-Save Trained Model
-   ↓
-Spam / Ham Prediction
-
-## 🎯 Project Objectives
-
-The main objectives of this project are:
-
-* Detect spam messages automatically.
-* Apply Natural Language Processing techniques to text data.
-* Convert text into numerical features using CountVectorizer.
-* Train a machine learning classification model.
-* Evaluate the model using standard classification metrics.
-* Save the trained model for future predictions.
-* Provide a command-line prediction interface.
-* Implement automated testing using PyTest.
-* Use GitHub Actions for Continuous Integration.
-
----
-
-## ✨ Key Features
-
-* 📧 Spam/Ham text classification
-* 🧠 Natural Language Processing
-* 🔤 Text preprocessing
-* 📊 CountVectorizer feature extraction
-* 🔢 Unigram and bigram features
-* 🤖 Multinomial Naive Bayes classifier
-* 📈 Accuracy and F1-score evaluation
-* 🔍 Precision and recall through classification report
-* 📉 Confusion matrix generation
-* 🔄 5-fold cross-validation when supported by the dataset
-* 💾 Model persistence using Joblib
-* 🧪 Automated testing using PyTest
-* ⚙️ GitHub Actions CI
-* 💻 Command-line prediction
-
----
-
-## 🛠️ Technologies Used
-
-| Technology              | Purpose                     |
-| ----------------------- | --------------------------- |
-| Python                  | Main programming language   |
-| Pandas                  | Data loading and processing |
-| NumPy                   | Numerical operations        |
-| Scikit-learn            | Machine learning and NLP    |
-| CountVectorizer         | Text feature extraction     |
-| Multinomial Naive Bayes | Classification              |
-| Joblib                  | Model persistence           |
-| Matplotlib              | Visualization               |
-| Seaborn                 | Data visualization support  |
-| PyTest                  | Automated testing           |
-| Git & GitHub            | Version control             |
-| GitHub Actions          | Continuous Integration      |
-
----
-
-## 🧠 Machine Learning Workflow
-
-The project follows this workflow:
+## Machine Learning Workflow
 
 ```text
 Dataset
-   ↓
-Data Validation
-   ↓
-Text Cleaning
-   ↓
-Feature Extraction
-   ↓
+  ↓
+Data validation
+  ↓
+Text cleaning
+  ↓
+Feature extraction
+  ↓
 CountVectorizer
-   ↓
-Train/Test Split
-   ↓
+  ↓
+Train/test split
+  ↓
 Multinomial Naive Bayes
-   ↓
-Model Prediction
-   ↓
-Model Evaluation
-   ↓
-Save Trained Model
-   ↓
-Spam / Ham Prediction
+  ↓
+Prediction
+  ↓
+Model evaluation
+  ↓
+Save model
+  ↓
+Spam/Ham classification
 ```
 
----
+## Model Details
 
-## 📂 Dataset
+The project uses a pipeline combining:
 
-The project is designed to work with a labelled text dataset containing:
+- `CountVectorizer(stop_words="english", ngram_range=(1, 2))`
+- `MultinomialNB(alpha=0.5)`
 
-* `text` — message content
-* `label` — classification label
+This is a strong baseline for text classification because it is fast, interpretable, and well-suited for sparse word-frequency features.
 
-The original project documentation uses the **UCI SMS Spam Collection** as the reference dataset.
+## Setup
 
-The dataset contains:
+### 1. Clone the repository
 
-* **5,574 messages**
-* **747 spam messages**
-* **4,827 ham messages**
-
-The training program validates that the required `text` and `label` columns are present before training.
-
----
-
-## 🔤 Text Processing and Feature Extraction
-
-Text data cannot be directly provided to a traditional machine learning classifier.
-
-Therefore, the project converts the text into numerical features.
-
-### CountVectorizer
-
-The project uses:
-
-```python
-CountVectorizer(
-    stop_words="english",
-    ngram_range=(1, 2)
-)
+```bash
+git clone https://github.com/Subhashini9210/SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING.git
+cd SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING
 ```
 
-This extracts:
+### 2. Create a virtual environment
 
-* **Unigrams** — individual words
-* **Bigrams** — pairs of consecutive words
-
-For example:
-
-```text
-free prize winner
+```bash
+python -m venv .venv
 ```
 
-can be represented using features such as:
+Activate it:
 
-```text
-free
-prize
-winner
-free prize
-prize winner
+- macOS/Linux:
+
+```bash
+source .venv/bin/activate
 ```
 
-These numerical features are then passed to the machine learning classifier.
+- Windows PowerShell:
 
----
-
-## 🤖 Machine Learning Model
-
-### Multinomial Naive Bayes
-
-The project uses:
-
-```python
-MultinomialNB(alpha=0.5)
+```powershell
+.\.venv\Scripts\Activate.ps1
 ```
 
-Multinomial Naive Bayes is well suited for text classification because it works effectively with discrete word-frequency features.
+### 3. Install dependencies
 
-### Why Naive Bayes?
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
-* Fast training
-* Fast prediction
-* Suitable for text classification
-* Computationally efficient
-* Works well with bag-of-words features
+## Download the Dataset
 
----
+From the project folder:
 
+```bash
+python spam-detection/src/spam_detection/download_data.py
+```
 
-## 📊 Model Evaluation
+This downloads the UCI SMS Spam Collection and saves it as a CSV dataset in the expected raw data folder.
 
-The trained spam detection model was evaluated on a stratified 80/20 train-test split using a Multinomial Naive Bayes classifier with CountVectorizer text features.
+## Train the Model
 
-### Performance Metrics
+```bash
+cd spam-detection
+python src/spam_detection/train.py
+```
+
+This script trains the spam classifier, saves the trained model, saves the confusion matrix plot, and prints evaluation metrics.
+
+## Predict a New Message
+
+```bash
+cd spam-detection
+python src/spam_detection/train.py --predict "Congratulations! You won a free prize."
+```
+
+## Run Tests
+
+```bash
+cd spam-detection
+python -m pytest -q
+```
+
+## Model Evaluation
+
+The trained model was evaluated on a stratified 80/20 train-test split.
+
+### Results
 
 | Metric | Result |
 |--------|--------|
@@ -379,27 +216,47 @@ The trained spam detection model was evaluated on a stratified 80/20 train-test 
 ### Confusion Matrix
 
 | Actual \ Predicted | Ham | Spam |
-|-------------------|-----|------|
-| Ham               | 961 | 5    |
-| Spam              | 9   | 140  |
+|--------------------|-----|------|
+| Ham                | 961 | 5    |
+| Spam               | 9   | 140  |
 
-### Classification Summary
+These results indicate that the classifier performs very well and is suitable as a baseline solution for spam detection tasks.
 
-- The model correctly classified the majority of both ham and spam messages.
-- Overall accuracy is very high, demonstrating strong spam detection performance.
-- The model is suitable for a baseline text-classification project and can be improved further with hyperparameter tuning or more advanced models.
+## GitHub Actions CI
 
-### Dataset
-- Dataset: UCI SMS Spam Collection
-- Total messages: 5,574
-- Spam messages: 747
-- Ham messages: 4,827
-- Split: 80/20 stratified train-test
-### Performance
+This repository includes a GitHub Actions workflow for automated validation.
 
-> ⚠️ Replace the values below with the actual values generated by your latest training run. Do not use example numbers.
+The workflow runs tests on repository changes to ensure the project remains stable and reproducible.
 
-| Metric   |           Result |
-| -------- | ---------------: |
-| Accuracy | 98.44% |
+## Usage Notes
 
+This project is suitable for:
+
+- learning spam classification with machine learning
+- portfolio or academic projects
+- baseline text classification experiments
+- further extension to TF-IDF, Logistic Regression, SVM, or deep learning models
+
+## Future Improvements
+
+Potential enhancements for the project include:
+
+- TF-IDF vectorization
+- Hyperparameter tuning
+- Improved preprocessing (stemming, lemmatization)
+- Real email metadata analysis
+- Deployment as a web app or API
+- Advanced models such as Logistic Regression, SVM, or BERT
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgements
+
+- UCI Machine Learning Repository for the SMS Spam Collection dataset
+- Scikit-learn documentation and community examples
+
+## Conclusion
+
+This project demonstrates a robust machine learning workflow for spam detection using text classification, data validation, evaluation, and model persistence. It is a strong end-to-end example of a practical NLP classification solution and can serve as a solid foundation for further enhancement.
