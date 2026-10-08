@@ -7,16 +7,49 @@ The project includes data validation, text feature extraction, model training, e
 ---
 2. Features
 
-Add:
+- Text preprocessing and cleaning
+- Bag-of-words feature extraction using CountVectorizer
+- Multinomial Naive Bayes classifier
+- Train/test split with stratification
+- Cross-validation evaluation
+- Confusion matrix generation
+- Model persistence using joblib
+- Automated testing with pytest
+- GitHub Actions CI workflow
 
-Spam/Ham classification
-Text preprocessing
-TF-IDF or CountVectorizer feature extraction
-Multinomial Naive Bayes classification
-Model evaluation
-Django web interface
-Real-time prediction
-Model saving/loading
+## Project Structure
+```text
+SPAM-EMAIL-DETECTION-WITH-MACHINE-LEARNING/
+├── AUTHORS.md
+├── LICENSE
+├── README.md
+├── report.md
+├── report.pdf
+├── slides.md
+├── slides.pdf
+├── requirements.txt
+├── .github/
+│   └── workflows/
+│       └── test.yml
+├── spam-detection/
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── data/
+│   │   └── raw/
+│   │       └── train.csv
+│   ├── outputs/
+│   │   ├── models/
+│   │   │   └── spam_classifier.joblib
+│   │   └── figures/
+│   │       └── confusion_matrix.png
+│   ├── src/
+│   │   └── spam_detection/
+│   │       ├── __init__.py
+│   │       ├── download_data.py
+│   │       └── train.py
+│   └── tests/
+│       ├── conftest.py
+│       └── test_train.py
 
  3. Technologies used
 
