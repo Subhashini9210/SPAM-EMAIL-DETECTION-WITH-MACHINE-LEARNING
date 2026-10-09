@@ -1,6 +1,6 @@
 # Authors
 
-- **Full name:** Subhashini  
+- **Full name:** Subhashini.vippala  
 - **GitHub:** @Subhashini9210  
 - **Student / Roll number:** [23KP1A6159]  
 - **Supervisor:** [J.RAMU SIR]  
