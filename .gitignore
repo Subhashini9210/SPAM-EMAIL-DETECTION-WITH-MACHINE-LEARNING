@@ -1,0 +1,16 @@
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+db.sqlite3
+staticfiles/
+training_corpus/
+SMSSpamCollection
+*.tar.bz2
+*.download
+**/data/raw/*.csv
+**/outputs/models/
+**/outputs/figures/*.png
+**/outputs/results/
+/*.css

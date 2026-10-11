@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#173f35">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Spam Email Detector</title>
+    <link rel="manifest" href="{% static 'detector/manifest.webmanifest' %}">
+    <link rel="apple-touch-icon" href="{% static 'detector/icon-192.png' %}">
+    <link rel="icon" href="{% static 'detector/icon.svg' %}" type="image/svg+xml">
+    <link rel="stylesheet" href="{% static 'detector/style.css' %}">
+</head>
+<body>
+    <main class="container">
+        <section class="card">
+            <h1>Spam Email Detector</h1>
+            <p class="subtitle">Check whether an email message is spam or ham.</p>
+            <button class="install-button" id="install-app" type="button" hidden>Install app</button>
+            <p class="install-hint" id="install-hint" hidden>Use your browser menu to add this app to your home screen.</p>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="email_text">Enter email content</label>
+                <textarea id="email_text" name="email_text" rows="8" maxlength="20000"
+                    placeholder="Paste your email message here..." required>{{ email_text }}</textarea>
+                {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+                <button class="check-button" type="submit">Check email</button>
+            </form>
+            {% if prediction %}
+            <div class="result" role="status">
+                <h2>Prediction result</h2>
+                <p>{{ prediction }}</p>
+            </div>
+            {% endif %}
+        </section>
+    </main>
+    <script src="{% static 'detector/script.js' %}"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('{% url "service-worker" %}').catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>
