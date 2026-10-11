@@ -22,6 +22,7 @@ and `ham`. For portfolio-quality evaluation, download the [UCI SMS Spam Collecti
 On Windows PowerShell:
 
 ```powershell
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 ```

@@ -79,7 +79,7 @@ def train_and_evaluate(
     folds = min(5, class_count)
     cv = StratifiedKFold(n_splits=folds, shuffle=True, random_state=42)
     cv_scores = cross_val_score(
-        _make_model(), texts, labels, cv=cv, scoring="f1_weighted"
+        _make_model(), texts, labels, cv=cv, scoring="f1_weighted" # type: ignore
     )
     cv_weighted_f1 = float(cv_scores.mean())
 
