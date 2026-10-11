@@ -12,10 +12,22 @@ MAX_EMAIL_LENGTH = 20000
 MINIMUM_CONFIDENCE_MARGIN = 1.25
 
 
+def get_model_path():
+    """Return the current model location, with a compatibility fallback for older project layouts."""
+    candidates = [
+        settings.BASE_DIR / "spam-detection" / "outputs" / "models" / "spam_classifier.joblib",
+        settings.BASE_DIR / "artifacts" / "spam_classifier.joblib",
+    ]
+    for model_path in candidates:
+        if model_path.exists():
+            return model_path
+    return candidates[0]
+
+
 @lru_cache(maxsize=1)
 def get_model():
     """Load the trained text classifier once per server process."""
-    model_path = settings.BASE_DIR / "artifacts" / "spam_classifier.joblib"
+    model_path = get_model_path()
     if not model_path.exists():
         return None
     return load(model_path)

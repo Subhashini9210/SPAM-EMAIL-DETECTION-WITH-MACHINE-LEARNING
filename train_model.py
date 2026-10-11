@@ -126,10 +126,15 @@ def main():
     print("Confusion matrix (true rows, predicted columns):")
     print(confusion_matrix(y_test, predictions, labels=model.classes_))
     print(classification_report(y_test, predictions, zero_division=0))
-    output = Path(__file__).resolve().parent / "artifacts" / "spam_classifier.joblib"
+    project_root = Path(__file__).resolve().parent
+    output = project_root / "spam-detection" / "outputs" / "models" / "spam_classifier.joblib"
+    legacy_output = project_root / "artifacts" / "spam_classifier.joblib"
     output.parent.mkdir(parents=True, exist_ok=True)
+    legacy_output.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, output)
+    joblib.dump(model, legacy_output)
     print(f"Saved model to {output}")
+    print(f"Also saved compatibility copy to {legacy_output}")
 
 
 if __name__ == "__main__":
