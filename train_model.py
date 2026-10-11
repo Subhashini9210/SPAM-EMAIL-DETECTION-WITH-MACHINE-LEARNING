@@ -1,5 +1,6 @@
 """Train and evaluate a spam classifier from a labeled CSV."""
 import argparse
+from math import ceil
 from email import policy
 from email.parser import BytesParser
 from pathlib import Path
@@ -11,6 +12,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
+
+from detector.classification import normalize_label
 
 
 def read_spamassassin_corpus(root):
@@ -97,8 +100,16 @@ def main():
     data = data[[args.label_column, args.text_column]].dropna()
     data[args.text_column] = data[args.text_column].astype(str).str.strip()
     data = data[data[args.text_column] != ""]
-    if data[args.label_column].nunique() < 2:
-        raise SystemExit("Training data must contain at least two different labels.")
+    try:
+        data[args.label_column] = data[args.label_column].map(normalize_label)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    class_counts = data[args.label_column].value_counts()
+    if set(class_counts.index) != {"ham", "spam"}:
+        raise SystemExit("Training data must contain both ham and spam messages.")
+    test_count = ceil(len(data) * 0.2)
+    if test_count < 2 or len(data) - test_count < 2 or class_counts.min() < 2:
+        raise SystemExit("Training data needs enough ham and spam messages for a stratified hold-out.")
 
     x_train, x_test, y_train, y_test = train_test_split(
         data[args.text_column], data[args.label_column], test_size=0.2,

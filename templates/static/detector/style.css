@@ -548,6 +548,13 @@ footer {
     color: #a2322d;
 }
 
+.input-hint,
+.result-hint {
+    margin-top: 8px;
+    color: #596b63;
+    font-size: 14px;
+}
+
 .result {
     margin-top: 24px;
     padding: 20px;

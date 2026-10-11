@@ -24,6 +24,7 @@
                 <label for="email_text">Enter email content</label>
                 <textarea id="email_text" name="email_text" rows="8" maxlength="20000"
                     placeholder="Paste your email message here..." required>{{ email_text }}</textarea>
+                <p class="input-hint">Messages over 20,000 characters are not accepted.</p>
                 {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
                 <button class="check-button" type="submit">Check email</button>
             </form>
@@ -31,6 +32,9 @@
             <div class="result" role="status">
                 <h2>Prediction result</h2>
                 <p>{{ prediction }}</p>
+                {% if prediction == "Uncertain" %}
+                <p class="result-hint">The message was too close to the classifier's confidence threshold. Review it manually.</p>
+                {% endif %}
             </div>
             {% endif %}
         </section>
@@ -39,7 +43,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('{% url "service-worker" %}').catch(() => {});
+                navigator.serviceWorker.register('{% url "service-worker" %}').catch((error) => {
+                    console.error('Service worker registration failed:', error);
+                });
             });
         }
     </script>
