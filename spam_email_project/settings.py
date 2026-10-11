@@ -1,13 +1,18 @@
 from pathlib import Path
 import os
 
+from django.core.exceptions import ImproperlyConfigured
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = "development-only-change-this-before-deployment"
-DEBUG = True
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "development-only-change-this-before-deployment")
-DEBUG = os.environ.get("DJANGO_DEBUG", "true").lower() == "true"
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+DEBUG = os.environ.get("DJANGO_DEBUG", "true").strip().lower() == "true"
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
+if not DEBUG and (
+    not SECRET_KEY.strip()
+    or SECRET_KEY == "development-only-change-this-before-deployment"
+):
+    raise ImproperlyConfigured("Set DJANGO_SECRET_KEY to a unique secret value when DEBUG is false.")
+
 if render_hostname := os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
     ALLOWED_HOSTS.append(render_hostname)
 ALLOWED_HOSTS.extend(
@@ -16,6 +21,10 @@ ALLOWED_HOSTS.extend(
     if host.strip()
 )
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 

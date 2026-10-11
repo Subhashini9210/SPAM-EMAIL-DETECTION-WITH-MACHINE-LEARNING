@@ -30,7 +30,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Open <http://127.0.0.1:8000/>. The app reports when the classifier has not been trained yet. The bundled artifact can be used for a quick local demo, but retrain it on the dataset you intend to evaluate.
+Open <http://127.0.0.1:8000/>. The app reports when the classifier has not been trained yet. The bundled artifact can be used for a quick local demo, but retrain it on the dataset you intend to evaluate. The development settings are for local use. For deployment, set `DJANGO_DEBUG=false`, provide a unique non-empty `DJANGO_SECRET_KEY`, and configure `DJANGO_ALLOWED_HOSTS` with the hostnames that should serve the app.
 
 ## Standalone SMS classifier
 
@@ -47,4 +47,4 @@ It saves a pipeline under `outputs/models/` and a confusion matrix under `output
 
 ## Deployment
 
-`render.yaml` configures a Render web service. Set a secret `DJANGO_SECRET_KEY` and `DJANGO_DEBUG=false` for deployment. The included SQLite database is local and ephemeral on hosts that do not provide persistent disks.
+The included `render.yaml` configures a free Render web service. Push the project to a GitHub repository, connect that repository in Render using **New > Blueprint**, and apply the blueprint. Render generates `DJANGO_SECRET_KEY`, collects static files, runs migrations, and starts Gunicorn. With `DJANGO_DEBUG=false`, the app rejects an empty or development-only secret key and enables HTTPS redirects, secure cookies, and one-year HSTS with subdomains and the preload directive; the HTTPS proxy header is configured for Render. The preload directive advertises preload eligibility but does not automatically submit the hostname to browser preload lists. Use a custom domain and verify preload requirements before submitting it. The Render URL uses HTTPS, which is required for installing the PWA. The free service may sleep when idle, and its local SQLite database is ephemeral; the classifier itself is included in `artifacts/`.
