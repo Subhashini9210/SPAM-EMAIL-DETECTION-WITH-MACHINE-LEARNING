@@ -30,7 +30,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Open <http://127.0.0.1:8000/>. The app reports when no classifier is available. The bundled model can be used for a local demo; retrain it on data appropriate for your evaluation.
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/). The app reports when no classifier is available. The bundled model can be used for a local demo; retrain it on data appropriate for your evaluation.
 
 ## Evaluation reference
 
