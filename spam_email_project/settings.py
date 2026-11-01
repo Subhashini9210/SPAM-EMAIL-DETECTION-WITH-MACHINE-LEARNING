@@ -6,7 +6,7 @@ from django.core.exceptions import ImproperlyConfigured
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "development-only-change-this-before-deployment")
 DEBUG = os.environ.get("DJANGO_DEBUG", "true").strip().lower() == "true"
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver", "0.0.0.0"]
 if not DEBUG and (
     not SECRET_KEY.strip()
     or SECRET_KEY == "development-only-change-this-before-deployment"
@@ -50,9 +50,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "spam_email_project.urls"
+
+TEMPLATE_DIRS = [
+    path for path in [
+        BASE_DIR / "templates",
+        BASE_DIR / "templates" / "templates",
+    ] if path.exists()
+]
+
 TEMPLATES = [{
     "BACKEND": "django.template.backends.django.DjangoTemplates",
-    "DIRS": [BASE_DIR / "templates" / "templates"],
+    "DIRS": TEMPLATE_DIRS,
     "APP_DIRS": True,
     "OPTIONS": {"context_processors": [
         "django.template.context_processors.request",
@@ -71,9 +79,14 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
 USE_TZ = True
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "templates" / "static"]
+STATICFILES_DIRS = [
+    path for path in [
+        BASE_DIR / "templates" / "static",
+        BASE_DIR / "static",
+    ] if path.exists()
+]
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
