@@ -53,8 +53,9 @@ ROOT_URLCONF = "spam_email_project.urls"
 
 TEMPLATE_DIRS = [
     path for path in [
-        BASE_DIR / "templates",
         BASE_DIR / "templates" / "templates",
+        BASE_DIR / "templates",
+        BASE_DIR / "detector" / "templates",
     ] if path.exists()
 ]
 
